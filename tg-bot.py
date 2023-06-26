@@ -7,6 +7,9 @@ import asyncio
 from main import make_request
 from majors import majors_dataset
 from survey import survey
+from linksCreating import search_links
+
+
 dotenv.load_dotenv(dotenv.find_dotenv())
 global personal_preferences_flag 
 global survey_flag
@@ -73,10 +76,20 @@ async def process_callback_survey(callback_query: types.CallbackQuery):
     global create_rm_flag
     await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id, survey,  parse_mode='Markdown')
-    survey_flag = True
     personal_preferences_flag = False
+    survey_flag = True
     create_rm_flag = False
 
+@dp.callback_query_handler(lambda c: c.data == 'create_rm')
+async def process_callback_skills(callback_query: types.CallbackQuery):
+    global personal_preferences_flag
+    global survey_flag
+    global create_rm_flag
+    await bot.answer_callback_query(callback_query.id)
+    await bot.send_message(callback_query.from_user.id, "Which roadmap?")
+    personal_preferences_flag = False
+    survey_flag = False
+    create_rm_flag = True
 
 @dp.message_handler()
 async def responce_skills(message: types.Message):
@@ -125,20 +138,16 @@ You will provide a list of topics that need to be further studied and immediatel
         response = make_request(message.text, """I want you to be a roadmap assistant. Make roadmap on granted speciality
         You will provide a list of topics that need to be further studied and immediately in the order of study. 
         Does not answer topics not related to work or skills you roudmap assistant do nothing do nothing with what is not related to the roadmap, the answer should contain only a roadmap and no greetings, wishes, nothing more.""")
+        links = search_links(response)
+        response = response.split('\n')
+        for i in range(len(links)):
+            response[i] = str(response[i]) + "   " + links[i]
+        " ".join(response)
         await bot.send_message(chat_id, response)
         create_rm_flag = False    
 
 
-@dp.callback_query_handler(lambda c: c.data == 'create_rm')
-async def process_callback_skills(callback_query: types.CallbackQuery):
-    global personal_preferences_flag
-    global survey_flag
-    global create_rm_flag
-    await bot.answer_callback_query(callback_query.id)
-    await bot.send_message(callback_query.from_user.id, "Which roadmap?")
-    personal_preferences_flag = False
-    survey_flag = False
-    create_rm_flag = True
+
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
