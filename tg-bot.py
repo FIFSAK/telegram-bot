@@ -10,6 +10,8 @@ from survey import survey
 dotenv.load_dotenv(dotenv.find_dotenv())
 global personal_preferences_flag 
 global survey_flag
+global create_rm_flag
+create_rm_flag = False
 personal_preferences_flag = False
 survey_flag = False
 # Configure logging
@@ -35,8 +37,9 @@ async def send_command1(message: types.Message):
     button1 = types.InlineKeyboardButton("Show list of majors", callback_data='majors')
     button2 = types.InlineKeyboardButton("I have some skills", callback_data='skills')
     button3 = types.InlineKeyboardButton("Take a survey", callback_data='survey')
+    button4 = types.InlineKeyboardButton("Create roadmap", callback_data='create_rm')
 
-    keyboard_command1.add(button1, button2, button3)
+    keyboard_command1.add(button1, button2, button3, button4)
     
     await message.reply("Please choose an option:", reply_markup=keyboard_command1)
 
@@ -44,41 +47,48 @@ async def send_command1(message: types.Message):
 async def process_callback_majors(callback_query: types.CallbackQuery):
     global personal_preferences_flag
     global survey_flag
+    global create_rm_flag
     await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id, majors_dataset, parse_mode='Markdown')
     personal_preferences_flag = False
     survey_flag = False
+    create_rm_flag = False
 
 @dp.callback_query_handler(lambda c: c.data == 'skills')
 async def process_callback_skills(callback_query: types.CallbackQuery):
     global personal_preferences_flag
     global survey_flag
+    global create_rm_flag
     await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id, "Which back graound you have and who do you want to be?")
     personal_preferences_flag = True
     survey_flag = False
+    create_rm_flag = False
     
 
 @dp.callback_query_handler(lambda c: c.data == 'survey')
 async def process_callback_survey(callback_query: types.CallbackQuery):
     global personal_preferences_flag
     global survey_flag
+    global create_rm_flag
     await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id, survey,  parse_mode='Markdown')
     survey_flag = True
     personal_preferences_flag = False
+    create_rm_flag = False
 
 
 @dp.message_handler()
 async def responce_skills(message: types.Message):
     global personal_preferences_flag
     global survey_flag
+    global create_rm_flag
     if personal_preferences_flag:
         response = make_request(message.text, """I want you to be a roadmap assistant. 
         I will provide programming skills that I already have and in which area I want to be a specialist. 
         You will provide a list of topics that need to be further studied and immediately in the order of study. 
         If I do not provide in which area I want to be a specialist, then you will offer no more than three professions based on the skills you already own and make a roadmap.
-        Does not answer topics not related to IT and work, the answer should contain only a roadmap and no greetings, wishes, nothing more.""")
+        Does not answer topics not related to work or skills you roudmap assistant do nothing do nothing with what is not related to the roadmap, the answer should contain only a roadmap and no greetings, wishes, nothing more.""")
         await bot.send_message(chat_id, response)
         personal_preferences_flag = False    
     if survey_flag:
@@ -105,13 +115,30 @@ async def responce_skills(message: types.Message):
                                     Are you interested in the business side of technology, like project management or business analysis? ({answers[16]})\n- 
                                     Would you prefer a job that is constantly evolving and requires continuous learning? ({answers[17]})\n- 
                                     Are you comfortable with abstraction and conceptualizing ideas? ({answers[18]})\n- 
-                                    Do you like to troubleshoot and fix things when they go wrong? ({answers[19]})""", "Given the following responses to a set of questions, please suggest the most suitable specialty in the IT field. briefly and clearly within 40 tokens, if for 40 tokens you managed to finish earlier. answer must be finished by dot. the answer does not need to enumerate the qualities of a person", 40)
+                                    Do you like to troubleshoot and fix things when they go wrong? ({answers[19]})""", "Given the following responses to a set of questions, please suggest the two most suitable specialty in the IT field. briefly and clearly within 40 tokens, if for 40 tokens you managed to finish earlier. answer must be finished by dot. the answer does not need to enumerate the qualities of a person", 40)
             await bot.send_message(chat_id, response)
             response = make_request(response ,f"""I want you to be a roadmap assistant. I will provide in which area I want to be a specialist. 
 You will provide a list of topics that need to be further studied and immediately in the order of study like roadmap.""")
             await bot.send_message(chat_id, response)
             survey_flag = False
+    if create_rm_flag:
+        response = make_request(message.text, """I want you to be a roadmap assistant. Make roadmap on granted speciality
+        You will provide a list of topics that need to be further studied and immediately in the order of study. 
+        Does not answer topics not related to work or skills you roudmap assistant do nothing do nothing with what is not related to the roadmap, the answer should contain only a roadmap and no greetings, wishes, nothing more.""")
+        await bot.send_message(chat_id, response)
+        create_rm_flag = False    
 
+
+@dp.callback_query_handler(lambda c: c.data == 'create_rm')
+async def process_callback_skills(callback_query: types.CallbackQuery):
+    global personal_preferences_flag
+    global survey_flag
+    global create_rm_flag
+    await bot.answer_callback_query(callback_query.id)
+    await bot.send_message(callback_query.from_user.id, "Which roadmap?")
+    personal_preferences_flag = False
+    survey_flag = False
+    create_rm_flag = True
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
