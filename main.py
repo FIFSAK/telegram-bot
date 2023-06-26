@@ -16,13 +16,15 @@ logging.basicConfig(level=logging.INFO)
 
 
 
-def make_request(message:  types.Message):
+def make_request(message, prompt, max_tokens = None):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo", 
         messages=[
-                {"role": "system", "content": "You are a assistant which give list of majors in programming."},
-                {"role": "user", "content": f"'{message.text}'"},
-            ]
+                {"role": "system", "content": f"{prompt}"},
+                {"role": "user", "content": f"{message}"},
+            ],
+        max_tokens = max_tokens,
+        temperature = 0
         )
 
     return response['choices'][0]['message']['content']
