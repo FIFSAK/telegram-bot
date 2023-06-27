@@ -37,21 +37,21 @@ def search_links(response):
 
 
 
-links = ['https://www.codecademy.com/catalog/language/html-css', 
-         'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics', 
-         'https://www.w3schools.com/html/html_responsive.asp', 
-         'https://www.keycdn.com/blog/sass-vs-less', 
-         'https://www.browserstack.com/guide/angular-vs-react-vs-vue', 
-         'https://www.goodcore.co.uk/blog/webpack-vs-gulp/',
-         'https://commons.wikimedia.org/wiki/File:Git-logo.svg', 
-         'https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675',
-         'https://en.wikipedia.org/wiki/Progressive_web_app',
-         'https://www.heavy.ai/technical-glossary/server-side-rendering',
-         'https://developer.mozilla.org/en-US/docs/Web/Accessibility',
-         'https://www.cloverinfotech.com/blog/what-is-performance-tuning-how-it-affects-corporations/', 
-         'https://www.acunetix.com/blog/web-security-zone/7-web-application-security-best-practices/', 
-         'https://www.novelvista.com/blogs/devops/what-is-continuous-deployment-delivery',
-         'https://github.com/nepaul/awesome-web-development']
+# links = ['https://www.codecademy.com/catalog/language/html-css', 
+#          'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics', 
+#          'https://www.w3schools.com/html/html_responsive.asp', 
+#          'https://www.keycdn.com/blog/sass-vs-less', 
+#          'https://www.browserstack.com/guide/angular-vs-react-vs-vue', 
+#          'https://www.goodcore.co.uk/blog/webpack-vs-gulp/',
+#          'https://commons.wikimedia.org/wiki/File:Git-logo.svg', 
+#          'https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675',
+#          'https://en.wikipedia.org/wiki/Progressive_web_app',
+#          'https://www.heavy.ai/technical-glossary/server-side-rendering',
+#          'https://developer.mozilla.org/en-US/docs/Web/Accessibility',
+#          'https://www.cloverinfotech.com/blog/what-is-performance-tuning-how-it-affects-corporations/', 
+#          'https://www.acunetix.com/blog/web-security-zone/7-web-application-security-best-practices/', 
+#          'https://www.novelvista.com/blogs/devops/what-is-continuous-deployment-delivery',
+#          'https://github.com/nepaul/awesome-web-development']
 
 
 
