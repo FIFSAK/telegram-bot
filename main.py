@@ -5,6 +5,8 @@ import logging
 from aiogram import Bot, Dispatcher, executor, types
 import asyncio
 
+
+
 dotenv.load_dotenv(dotenv.find_dotenv())
 
 
@@ -28,3 +30,4 @@ def make_request(message, prompt, max_tokens = None):
         )
 
     return response['choices'][0]['message']['content']
+
