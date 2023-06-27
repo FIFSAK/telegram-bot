@@ -141,8 +141,8 @@ You will provide a list of topics that need to be further studied and immediatel
         links = search_links(response)
         response = response.split('\n')
         for i in range(len(links)):
-            response[i] = str(response[i]) + "   " + links[i]
-        " ".join(response)
+            response[i] = response[i] + f"({links[i]})\n"
+        response = " ".join(response)
         await bot.send_message(chat_id, response)
         create_rm_flag = False    
 
