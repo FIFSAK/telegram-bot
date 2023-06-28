@@ -1,11 +1,11 @@
 import os
 import dotenv
 import logging
+import datetime
 from aiogram import Bot, Dispatcher, executor, types
 import asyncio
-from main import make_request
-from majors import majors_dataset
-from survey import survey
+from gpt_req import make_request
+from majors import majors_dataset, survey
 from linksCreating import search_links
 from lgchainTest import search_links_lch
 
@@ -55,6 +55,15 @@ async def process_callback_majors(callback_query: types.CallbackQuery):
     personal_preferences_flag = False
     survey_flag = False
     create_rm_flag = False
+    mock_message = types.Message(
+        message_id=callback_query.message.message_id,
+        from_user=callback_query.from_user,
+        chat=callback_query.message.chat,
+        date=int(callback_query.message.date.timestamp()),  # convert datetime to timestamp
+        text="/command1",
+        bot=bot
+    )
+    await send_command1(mock_message)
 
 @dp.callback_query_handler(lambda c: c.data == 'skills')
 async def process_callback_skills(callback_query: types.CallbackQuery):
@@ -145,7 +154,15 @@ You will provide a list of topics that need to be further studied and immediatel
         print(response)
         await bot.send_message(chat_id, response)
         create_rm_flag = False    
-
+    mock_message = types.Message(
+        message_id=message.message_id,
+        from_user=message.from_user,
+        chat=message.chat,
+        date=int(message.date.timestamp()),  # convert datetime to timestamp
+        text="/command1",
+        bot=bot
+    )
+    await send_command1(mock_message)
 
 
 
