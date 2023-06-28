@@ -62,7 +62,7 @@ async def process_callback_skills(callback_query: types.CallbackQuery):
     global survey_flag
     global create_rm_flag
     await bot.answer_callback_query(callback_query.id)
-    await bot.send_message(callback_query.from_user.id, "Which back graound you have and who do you want to be?")
+    await bot.send_message(callback_query.from_user.id, "Which background you have and who do you want to be?")
     personal_preferences_flag = True
     survey_flag = False
     create_rm_flag = False
@@ -142,6 +142,7 @@ You will provide a list of topics that need to be further studied and immediatel
         for i in range(len(links)):
             response[i] = response[i] + f"({links[i]})\n"
         response = " ".join(response)
+        print(response)
         await bot.send_message(chat_id, response)
         create_rm_flag = False    
 
