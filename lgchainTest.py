@@ -11,8 +11,9 @@ llm = OpenAI(temperature=0)
 
 def search_links_lch(response):
     links = []
-    # response = response.split("\n")
-    for i in response[3:]:
+    response = response.split("\n")
+    for i in response:
+        print(response)
         query = llm.predict(f"give 1 link of free resource for each topic to learn {i} CHECK THAT ALLL SITES ARE WORKING ")
         links.append(query)
         print(links)
