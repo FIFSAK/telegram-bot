@@ -116,6 +116,7 @@ async def wait_message():
 
 @dp.message_handler()
 async def responce_skills(message: types.Message):
+    
     global personal_preferences_flag
     global survey_flag
     global create_rm_flag
@@ -183,29 +184,38 @@ You will provide a list of topics that need to be further studied and immediatel
         print("response created")
         print(response)
         
-        def print_message():
+        gather_links_done = threading.Event()
+
+        async def print_message():
             while not gather_links_done.is_set():
-                wait_message()
+                await wait_message()
                 time.sleep(1)
 
+        def between_callback():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
 
+            loop.run_until_complete(print_message())
+            loop.close()
+        
         def gather_links():
             # здесь ваш асинхронный процесс сбора ссылок, который занимает пару минут
-            links = search_links_lch(response)
+            links = ['\n\n1. Python: https://www.codecademy.com/learn/learn-python\n2. Java: https://www.codecademy.com/learn/learn-java']
+            # links = search_links_lch(response)
+            time.sleep(10)
             gather_links_done.set()
             return links
 
 
-        gather_links_done = threading.Event()
 
-        thread1 = threading.Thread(target=print_message)
-        thread2 = threading.Thread(target=gather_links)
+        thread1 = threading.Thread(target=between_callback)
+        # thread2 = threading.Thread(target=gather_links)
     
         thread1.start()
-        thread2.start()
+        # thread2.start()
     
         thread1.join()
-        thread2.join()
+        # thread2.join()
         links = gather_links()
 
 
