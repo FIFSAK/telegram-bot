@@ -184,11 +184,13 @@ You will provide a list of topics that need to be further studied and immediatel
         #     (4) Learn and take a course on version control systems such as Git.
         #     (5) Learn and take a course on server management and deployment using tools such as Docker, Kubernetes, or AWS.
         #     (6) Learn and take a course on testing frameworks such as Pytest or JUnit.
-        #     (7) Learn and take a course on security best practices for web applications."""
+        #     (7) Learn and take a course on security best practices for web applications."""]
+        await bot.send_message(chat_id, response)
+        print(response)
         async def send_message():
             while not gather_links_done.is_set():
                 await bot.send_message(chat_id, "Wait a few seconds...")
-                await asyncio.sleep(2)
+                await asyncio.sleep(30)
 
 
         async def gather_links(response):
@@ -215,6 +217,7 @@ You will provide a list of topics that need to be further studied and immediatel
 
         _, links = await asyncio.gather(task1, task2)
         response = response.split("\n")
+        links = links.split("\n")
         for i in range(len(links)):
             response[i] = response[i] + f"({links[i]})\n"
         response = " ".join(response)

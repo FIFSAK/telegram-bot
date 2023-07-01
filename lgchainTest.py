@@ -16,12 +16,15 @@ llm = OpenAI(temperature=0)
 
 def search_links_lch(response):
     links = []
-    response = response.split("\n")
-    for i in response:
-        query = llm.predict(f"give 1 link of free resource for each topic to learn {i} CHECK THAT ALLL SITES ARE WORKING ")
-        links.append(query)
-        print(links)
-    return links
+    # response = response.split("\n")
+    # for i in response:
+    #     query = llm.predict(f"give 1 link of free resource for each topic to learn {i} CHECK THAT ALLL SITES ARE WORKING ")
+    #     links.append(query)
+    #     print(links)
+    query = llm.predict(f"give 1 link of free resource for each topic to learn {response} CHECK THAT ALLL SITES ARE WORKING ")
+    # links.append(query)
+    print(query)
+    return query
 
 """['\n\n1. Python Basics: https://www.learnpython.org/\n2. Web Frameworks: https://www.fullstackpython.com/web-frameworks.html\n3. Database: https://www.tutorialspoint.com/sql/\n4. RESTful APIs: https://www.codecademy.com/learn/learn-rest-apis\n5. Security: https://www.owasp.org/index.php/Category:OWASP_Python_Project\n6. Testing: https://www.guru99.com/python-testing.html\n7. Deployment: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps', '\n\n1. HTML: \nhttps://www.w3schools.com/html/\n\n2. CSS: \nhttps://www.w3schools.com/css/\n\n3. JavaScript: \nhttps://www.w3schools.com/js/\n\n4. Python: \nhttps://www.learnpython.org/\n\n5. Java: \nhttps://www.tutorialspoint.com/java/index.htm', '\n\n1. Python Fundamentals (learn): https://www.learnpython.org/', '\n\nVariables: https://www.tutorialspoint.com/cprogramming/c_variables.htm\n\nData Types: https://www.tutorialspoint.com/cprogramming/c_data_types.htm\n\nOperators: https://www.tutorialspoint.com/cprogramming/c_operators.htm', '\n\nControl Flow: \nhttps://www.tutorialspoint.com/python/python_decision_making.htm\n\nLoops: \nhttps://www.tutorialspoint.com/python/python_loops.htm', '\n\nFunctions: \nhttps://www.w3schools.com/python/python_functions.asp\n\nModules: \nhttps://www.tutorialspoint.com/python/python_modules.htm', '\n\n1. File Handling: \nhttps://www.tutorialspoint.com/cprogramming/c_file_handling.htm', '\n\n1. HTML: \nhttps://www.w3schools.com/html/\n\n2. CSS: \nhttps://www.w3schools.com/css/\n\n3. JavaScript: \nhttps://www.w3schools.com/js/\n\n4. Python: 
 \nhttps://www.learnpython.org/\n\n5. Java: \nhttps://www.tutorialspoint.com/java/index.htm', '\n\n1. Object-Oriented Programming: https://www.tutorialspoint.com/object_oriented_programming/index.htm', '\n\n1. Classes and Objects: https://www.tutorialspoint.com/java/java_object_classes.htm', '\n\nInheritance: \nhttps://www.tutorialspoint.com/java/java_inheritance.htm\n\nPolymorphism: \nhttps://www.tutorialspoint.com/java/java_polymorphism.htm', '\n\nEncapsulation: \nhttps://www.tutorialspoint.com/java/java_encapsulation.htm\n\nAbstraction: \nhttps://www.tutorialspoint.com/java/java_abstraction.htm', '\n\n1. Exception Handling: \nhttps://www.tutorialspoint.com/java/java_exceptions.htm', '\n\n1. HTML: \nhttps://www.w3schools.com/html/\n\n2. CSS: \nhttps://www.w3schools.com/css/\n\n3. 
