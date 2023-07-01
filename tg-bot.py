@@ -113,7 +113,7 @@ async def process_callback_skills(callback_query: types.CallbackQuery):
 
 async def wait_message():
     print("+++++++++++++++++++++++++++++++++++")
-    await bot.send_message(chat_id, "wait a few minute")
+    # await bot.send_message(chat_id, "wait a few minute")
 
 
 @dp.message_handler()
@@ -185,13 +185,10 @@ You will provide a list of topics that need to be further studied and immediatel
 
         print("response created")
         print(response)
-        periodic_update_task = asyncio.create_task(send_periodic_updates(chat_id, bot))
-
-        await periodic_update_task 
         
         def print_message():
             while not gather_links_done.is_set():
-                wait_message()
+                print("wait a few minute")
                 time.sleep(1)
 
 
