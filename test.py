@@ -1,20 +1,21 @@
-a ="""1. Basics of C++ programming language:
-   - Variables, data types, and operators
-   - Control flow statements (if-else, loops)
-   - Functions and function overloading
-   - Pointers and references
-   - Object-oriented programming concepts (classes, objects, inheritance, polymorphism)
+a ="""Free Online Resources:
 
-2. Standard Template Library (STL):
-   - Containers (vector, list, map, etc.)
-   - Algorithms (sorting, searching, etc.)
-   - Iterators and iterators categories
-   - Function objects and functors
+1. JavaScript Fundamentals:
+   - MDN Web Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+   - W3Schools: https://www.w3schools.com/js/
+   - JavaScript.info: https://javascript.info/
+   - FreeCodeCamp: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/
 
-3. Memory management:
-   - Stack vs heap memory
-   - Dynamic memory allocation (new/delete, malloc/free)
-   - Smart pointers (unique_ptr, shared_ptr, weak_ptr)
-   - Memory leaks and memory corruption"""
-a = a.split("\n")
-print(a)
+2. Front-End Development:
+   - React.js: https://reactjs.org/
+   - Redux: https://redux.js.org/
+   - Vue.js: https://vuejs.org/
+   - Angular: https://angular.io/
+   - Bootstrap: https://getbootstrap.com/
+   - Tailwind CSS: https://tailwindcss.com/
+   - Webpack: https://webpack.js.org/
+   - Babel: https://babeljs.io/
+   - npm: https://www.npmjs.com/
+
+3. Back"""
+print(len(a))

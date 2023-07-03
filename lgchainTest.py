@@ -15,6 +15,6 @@ llm = OpenAI(temperature=0)
 
 
 def search_links_lch(response):
-    query = llm.predict(f"generate a list of free online resources for each of the following topics {response} CHECK THAT ALLL SITES ARE WORKING. IMPORTANT adjust to the limit of up to 4,096 characters. ")
+    query = llm.predict(f"generate a list of free online resources for each of the following topics {response}. Always complete the paragraph. check that all sites are working. important adjust to the limit of up to 4,096 characters. ")
     print(query)
     return query
