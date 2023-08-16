@@ -29,6 +29,7 @@ dp = Dispatcher(bot)
 chat_id = 764803234
 
 
+
 @dp.message_handler(commands=["start"])
 async def send_welcome(message: types.Message):
     await message.reply("Hi!\nI'm your roadmap assistant!.")
